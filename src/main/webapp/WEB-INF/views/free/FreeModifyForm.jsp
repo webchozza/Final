@@ -59,16 +59,16 @@
          <form name="frm" action="bfreemodify.do"
             onsubmit="return gosubmit1()">
 
-            <div class="6u 12u$(xsmall)" style="width: 300pt;">
+            <div class="6u 12u$(xsmall)" style="width:90%;">
                <input type="text" name="board_title" id="subject"
-                  value="${boardDTO.board_title }" style="width: 300pt;"
+                  value="${boardDTO.board_title }" style="width: 90%;"
                   placeholder="제목" />
             </div>
-            <div class="12u$">
-               <textarea name="board_content" id="smarteditor" rows="10" cols="100" style="width:766px; height:412px;">${boardDTO.board_content }</textarea>
+            <div class="12u$" style="width:90%;">
+               <textarea name="board_content" id="smarteditor" rows="10" cols="100" style="width:100%; min-width:200px; height:400px;">${boardDTO.board_content }</textarea>
             </div>
-            <div class="6u 12u$(xsmall)" style="width: 300pt;">
-				<input name="board_tag" type="text" id="message" style="width: 300pt" placeholder="태그" value="${boardDTO.board_tag}">
+            <div class="6u 12u$(xsmall)" style="width: 90%;">
+				<input name="board_tag" type="text" id="message" style="width: 90%;" placeholder="태그" value="${boardDTO.board_tag}">
             </div>
             <div class="12u$">
                <ul class="actions" style="float: inherit;">

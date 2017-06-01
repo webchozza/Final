@@ -53,24 +53,22 @@
 <div id="wrapper">
 	<div id="main" align="center">
 		<div class="inner">
-			<h3>Community</h3>
+			<h3>Q&A</h3>
 			<form name="frm" action="bqnawrite.do" onsubmit="return gosubmit1()">
-
 				<input type="hidden" name="member_id"
 					value="${sessionScope.member_id}"> <input type="hidden"
 					name="board_nickname" value="${sessionScope.member_name}">
-
-
-				<div class="6u 12u$(xsmall)" style="width: 300pt;">
+					
+				<div class="6u 12u$(xsmall)" style="width:90%;">
 					<input type="text" name="board_title" id="subject" value=""
-						style="width: 300pt;" placeholder="제목" />
+						 style="width:90%;" placeholder="제목" />
 				</div>
-				<div class="12u$">
-					<textarea name="board_content" id="smarteditor" rows="10" cols="100" style="width:50%; height:412px;" placeholder="내용을 입력하세요."></textarea>
+				<div class="12u$" style="width:90%;">
+					<textarea name="board_content" id="smarteditor" rows="10" cols="100" style="width:100%; min-width:200px; height:400px;" placeholder="내용을 입력하세요."></textarea>
 				</div>
-				<div class="6u 12u$(xsmall)" style="width: 300pt;">
+				<div class="6u 12u$(xsmall)" style="width:90%;">
 					<textarea name="board_tag" id="message"
-						style="width: 300pt;" placeholder="태그"
+						 style="width:90%;" placeholder="태그"
 						rows="1"></textarea>
 				</div>
 				<div class="12u$">

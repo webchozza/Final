@@ -44,26 +44,6 @@ public class BqnaWrite {
 		boardDTO.setBoard_content(content);
 		boardDTO.setBoard_tag(tagService.insertTag(boardDTO.getBoard_tag(), 4));//bgroup_id=4
 		
-		String tag = boardDTO.getBoard_tag().replaceAll(" ", "");
-		while (tag.contains(",,")) {
-			tag = tag.replaceAll(",,", ",");
-		}
-		if (tag==null|| tag.trim().isEmpty()||tag.trim().equals(",")) {
-			tag = "";
-		} else {
-			if (tag.charAt(tag.length() - 1) == ',') {
-				tag=tag.substring(0, tag.length() - 1);
-			}
-			if (tag.charAt(0) == ',') {
-				tag=tag.substring(1, tag.length());
-			}
-		}
-
-		if(tag==""||tag.equals("Q&A"))
-			boardDTO.setBoard_tag("Q&A");
-		else
-			boardDTO.setBoard_tag("Q&A," + tag);
-		
 		bqnaService.bqnaWrite(boardDTO);
 		
 		// by eongoo, new board noti

@@ -254,7 +254,7 @@ function recommendcheck(checkValue){
   js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.9";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-	<h4>Community</h4>
+	<h4>Q&A</h4>
 	<!-- 바디 -->
 	<section id="banner">
 		<div class="content">
