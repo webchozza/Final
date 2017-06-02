@@ -11,7 +11,7 @@ setInterval(function(){
 			if(data == 0){
 				$("#notiarea").html("");
 			}else{
-			var str = '<span class="fa fa-plus" style="color: #f56a6a;">&nbsp;'+3+'</span>';
+			var str = '<span class="fa fa-plus" style="color: #f56a6a;">&nbsp;'+data+'</span>';
 			$("#notiarea").html("");
 			$("#notiarea").html(str);
 			}

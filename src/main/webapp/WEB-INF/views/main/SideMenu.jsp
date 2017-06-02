@@ -179,15 +179,15 @@ display:none;
 			<!-- 메뉴 -->
 			<nav id="menu">
 				<ul>
-					<li><a href="/dokky/main.do">메인</a></li>
-					<li><a href="/dokky/bqnalist.do">Q&A게시판</a></li>
-					<li><span class="opener">구인구직</span>
+					<li><a href="/dokky/main.do"><b>메인</b></a></li>
+					<li><a href="/dokky/bqnalist.do"><b>Q&A게시판</b></a></li>
+					<li><span class="opener"><b>구인구직</b></span>
 						<ul>
-							<li><a href="#">구인</a></li>
-							<li><a href="#">구직</a></li>
+							<li><a href="#"><b>구인</b></a></li>
+							<li><a href="#"><b>구직</b></a></li>
 						</ul></li>
-					<li><a href="/dokky/bfreelist.do">자유게시판</a></li>
-					<li><a href="/dokky/bcodelist.do">오픈소스</a></li>
+					<li><a href="/dokky/bfreelist.do"><b>자유게시판</b></a></li>
+					<li><a href="/dokky/bcodelist.do"><b>오픈소스</b></a></li>
 				</ul>
 			</nav>
 				<div class="mini-posts">

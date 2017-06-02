@@ -40,7 +40,7 @@ public class BCqnaWrite {
 		mav.addObject("bcommentDTO", bcommentDTO);
 		
 		//by eongoo, comment noti
-		noti.insertCommentNoti(bcommentDTO.getBoard_id(), bcommentDTO.getMember_id(), "/bqnaDetail");
+		noti.insertCommentNoti(bcommentDTO.getBoard_id(), bcommentDTO.getMember_id(), "/bqnadetail");
 		//
 		
 		Map<String, Object> map = new HashMap<String, Object>();
