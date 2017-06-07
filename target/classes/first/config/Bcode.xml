@@ -8,8 +8,11 @@
 	   <!-- 6.정렬 -->
 	   <!-- 9.검색 -->
 	   <select id="list" parameterType="java.util.Map" resultType="first.com.model.BoardDTO">
-	     SELECT * FROM BOARD WHERE BGROUP_ID = '1' AND BOARD_TITLE LIKE '%'||#{search}||'%'  
-	     ORDER BY
+	     SELECT * FROM (SELECT  count(b.scrap_id) as scrapcount, a.* FROM 
+	    (SELECT * FROM BOARD WHERE BGROUP_ID = '1' AND BOARD_TITLE LIKE '%'||#{search}||'%') a 
+	     LEFT OUTER JOIN scrap b ON a.board_id = b.board_id GROUP BY 
+		 a.board_id, a.member_id, a.board_title, a.board_content, a.board_date, a.board_nickname, a.board_hit, a.board_like, a.board_bad, 
+		 a.board_comment_count, a.board_password, a.board_ip, a.board_filecount, a.bgroup_id, a.board_tag) ORDER BY
 	     <if test="lineup == 1">
 	     BOARD_DATE
 	     </if>
@@ -21,6 +24,9 @@
 	     </if>
 	     <if test="lineup == 4">
 	     BOARD_LIKE
+	     </if>
+	     <if test="lineup == 5">
+	     scrapcount 
 	     </if>
 	     DESC
 	   </select>

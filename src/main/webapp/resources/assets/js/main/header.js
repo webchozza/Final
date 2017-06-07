@@ -67,13 +67,6 @@ $(function() {
 			return false;
 		}
 
-		if (window.getSelection) {
-			window.getSelection().removeAllRanges();
-			var range = document.createRange();
-			range.selectNode(document.getElementById('final-span'));
-			window.getSelection().addRange(range);
-		}
-
 	};
 
 	//음성 인식 서비스가 결과를 반환하면 발동됩니다. 단어나 문구가 올바르게 인식되어 앱으로 다시 전달되었습니다.(event = 음성인식 이벤트(객체 안에 음성인식된 결과들도 포함되있음)
@@ -83,7 +76,6 @@ $(function() {
 	//(크롬으로 실행시 개발자 도구를 확인하면 SpeechRecognitionResultList객체가 event.results의 객체로 나타남
 	recognition.onresult = function(event) {
 
-		var interimTranscript = '';
 		if (typeof (event.results) == 'undefined') {//음성 인식 결과가 undefined라면
 			recognition.onend = null;//음성 인식 서비스가 끊어지면 발동됩니다.
 			recognition.stop();
@@ -98,31 +90,33 @@ $(function() {
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
 			if (event.results[i].isFinal) {//isFinal 속성은 결과가 최종인지 (true) 또는 그렇지 않은지 (false) 나타냄(최종이라면 = 음성인식이 끝났다면)
 				finalTranscript += event.results[i][0].transcript;//transcript = 인식 된 단어의 사본이 포함 된 문자열을 반환합니다.
-			} else {
-				interimTranscript += event.results[i][0].transcript;
-			}
+			} 
 		}
 		
 		$('#soundsearch').val(linebreak(finalTranscript));
 	
 		finalTranscript = capitalize(finalTranscript);//문자열에서 공백으로 구분 된 모든 단어를 대문자로 변환합니다.
-		
+
 		fireCommand(finalTranscript);
 	};
 	
 	function fireCommand(string) {
-
 		if (string.indexOf("다시") != -1) {
 
 			recheck = true;
 			$('#soundsearch').val("");
 			
-		} else if (string.endsWith("검색")){
+		} else if (string.indexOf("검색") != -1){
 			
-			var a = string.substring(0, string.length - 2);
-			var trimString = trim(a);
+			var str = string.split("검색");
+			for( var i in str){
+				if( i == 0 ){
+					str = str[i];
+					break;
+				}
+			}
 
-			$("#soundsearch").val(trimString);
+			$("#soundsearch").val(str);
 			$("#soundsubmit").click();
 			recognition.stop();
 			
@@ -167,8 +161,6 @@ $(function() {
 		ignoreOnend = false;
 
 		finalTranscript = '';
-		final_span.innerHTML = '';
-		interim_span.innerHTML = '';
 
 	}
 	

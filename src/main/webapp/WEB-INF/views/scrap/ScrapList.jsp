@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/assets/js/memberpage/scrap.js?v=1"></script>
+<script src="resources/assets/js/memberpage/scrap.js?v=3"></script>
 <title>DOKKY</title>
 <style>
 input[name=ss] {
@@ -22,9 +22,28 @@ border-bottom-color: #FFFFFF;
   text-decoration:none !important
 }
 </style>
+<script>
+$(window).on('popstate', function(event) {
+	  var data = event.originalEvent.state;
+	  var member_id = ${sessionScope.member_id};
+	  var mpch = $("#mpch").val();
+	  
+	  if(mpch == "on"){
+		  $("#movearea").html(data.data);
+	  }else{
+		  $("#movearea").html("");
+	  	  $("#mainarea").html("");
+	      $("#mainarea").load("/dokky/MemberPage.do", {
+			member_id : member_id,
+			ap : "PushState",
+	      },function(){
+				$("#mpch").val("on");
+		});
+	  }
+	});
+</script>
 </head>
 <body>
-<div id="movearea">
 			<!-- 바디 -->
 	<div class="table-wrapper">
 	<c:if test="${myCount eq null}">
@@ -97,7 +116,6 @@ border-bottom-color: #FFFFFF;
 			.vc { height:3%; top: 0; bottom:0; margin-top:auto; margin-bottom:auto; }
 			</style>
 			<!--ㅡㅡㅡㅡㅡ paging ㅡㅡㅡㅡㅡ-->
-			</div>
 			<br/><br/><br/>
 <form name="valueform">
 <input type="hidden" id="member_id" value="${member_id}"/>

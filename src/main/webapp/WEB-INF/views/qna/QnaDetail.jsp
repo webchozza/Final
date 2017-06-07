@@ -35,6 +35,17 @@ function insertScrap(){
 	});
 }
 
+//비로그인시 유효성 검사
+function vali(){
+	alert("로그인 후에 이용가능한 서비스입니다.");
+	
+	if(!confirm("로그인 화면으로 이동하시겠습니까?")){
+		return false;
+	}
+	
+	location.href="/dokky/loginform.do";
+}
+
 function scrapcheck(checkValue){
 	console.log(checkValue);
 //스크랩하지 않은 글이면 클릭 가능
@@ -44,7 +55,7 @@ var strA = '<a href="javascript:;" style="font-size: 30px" class="icon fa-bookma
 var strDiv = '<div style="font-size: 30px; color: #f56a6a;" class="icon fa-bookmark"></div>';
 	strDiv += '<h2 style="color: #f56a6a;">스크랩</h2>';
 	
-var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-bookmark"></div>';
+var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-bookmark" onclick="return vali()"></div>';
 	strDivNo += '<h2 style="color: #7f888f;">스크랩</h2>';
 	
 if(checkValue == -1){
@@ -65,7 +76,7 @@ function recommendcheck(checkValue){
 	var strDiv = '<div style="font-size: 30px; color: #f56a6a;" class="icon fa-thumbs-up"></div>';
 		strDiv += '<h2 style="color: #f56a6a;">${detail.board_like }</h2>';
 		
-	var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-thumbs-up"></div>';
+	var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-thumbs-up" onclick="return vali()"></div>';
 		strDivNo += '<h2 style="color: #7f888f;">${detail.board_like }</h2>';
 		
 	if(checkValue == -1){
@@ -200,7 +211,7 @@ function recommendcheck(checkValue){
 	$(window).resize(function(){
 		if(window.innerWidth > 500){
 			$("#answerarea").html('');
-			$("#answerarea").html('<input type="button" value="질문자 채택" class="button special" style="background-color:#00B700" onclick="return answerdelete(\"${answercomment.bcomment_id}\",\"${detail.board_id}\",\"${currentPage}\")">');
+			$("#answerarea").html('<input type="button" value="질문자 채택" class="button special" style="background-color:#00B700" onclick="return answerdelete(\"${answercomment.bcomment_id}\",\"${detail.board_id}\",\"${currentPage}\",\"${answercomment.answer_id}\",\"${sessionScope.member_id}\")">');
 		}else if(window.innerWidth <= 500){
 			$("#answerarea").html('');
 		}
@@ -330,14 +341,20 @@ function recommendcheck(checkValue){
 										</div>
 										<div style="overflow: hidden; width:20%;" align="center">&nbsp;&nbsp;
 											<a
-												href="AnswerCancel.do?bcomment_id=${answercomment.bcomment_id}&board_id=${detail.board_id}&currentPage=${currentPage}"
+												href="javascript:;"
 												class="icon fa-check-circle"
-												style="font-size: 50px; color: #00B700"></a>&nbsp;&nbsp; <br>
+												style="font-size: 50px; color: #00B700" onclick='return answerdelete("${answercomment.bcomment_id}","${detail.board_id}","${currentPage}","${answercomment.answer_id}","${sessionScope.member_id}")'></a>&nbsp;&nbsp; <br>
 											<span id="answerarea">
+											<!-- 질문자 채택 취소 버튼  -->
 											</span>
 										</div>
 										<script>
-										function answerdelete(bcomment_id,board_id,currentPage){
+										function answerdelete(bcomment_id,board_id,currentPage,answer_id,session_id){
+											
+											if(session_id != answer_id){
+												return false;
+											}
+											
 											if(confirm("답변을 취소하시겠습니까?")==false){
 												return false;
 											}

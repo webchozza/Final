@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/assets/js/memberpage/memberpage.js?v=3"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/memberpage/memberpage.js?v=5"></script>
 <title>회원 정보 보기</title>
 <style>
 #b{
@@ -25,6 +25,26 @@ function gosubmit1_message() {
 $(document).ready(function(){
 	followcheck("${followCheck}");
 });
+
+$(window).on('popstate', function(event) {
+	  var data = event.originalEvent.state;
+	  var session_id = $("#session_id").val();
+	  var mpch = $("#mpch").val();
+	  
+	  if(mpch == "on"){
+		  $("#movearea").html(data.data);
+	  }else{
+		  $("#movearea").html("");
+	  	  $("#mainarea").html("");
+	      $("#mainarea").load("/dokky/MemberPage.do", {
+			member_id : session_id,
+			ap : "PushState",
+	      },function(){
+				$("#mpch").val("on");
+		});
+	  }
+	});
+	
 </script>
 </head>
 <body>
@@ -47,7 +67,7 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div class="row 100% uniform" style="background-color: #f5f6f7; width:30%; display: inline-block; max-height:30%; position:relative; left:10px; ">
-		<div class="4u" style="width: 90%; height: 117px;">
+		<div class="4u" style="width: 90%; height: 129px;">
 		<div id="me"><span id="plusFollow" class="image fit fa fa-user-plus" style="width:110px; text-align: left; font-size: 25px; color: #f56a6a;"></span></div>
 		</div>
 		</div>
@@ -71,6 +91,7 @@ $(document).ready(function(){
 <input type="hidden" name="i" id="i" value="${i}"/>
 <input type="hidden" id="path" value="${path}"/>
 <input type="hidden" id="session_id" value="${sessionScope.member_id}"/>
+<input type="hidden" id="mpch" value="${mpch}"/>
 </form>
 </body>
 </html>

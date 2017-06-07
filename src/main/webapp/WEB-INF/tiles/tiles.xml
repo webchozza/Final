@@ -150,11 +150,20 @@
 	<definition name="FreeList" extends="Main">
 		<put-attribute name="body" value="/WEB-INF/views/free/FreeList.jsp" />
 	</definition>
-
+	
+	<definition name="jobList" extends="Main">
+		<put-attribute name="body" value="/WEB-INF/views/job/jobList.jsp" />
+	</definition>
+	
 	<!-- 글쓰기폼 -->
 	<definition name="FreeWriteForm" extends="Main">
 		<put-attribute name="body"
 			value="/WEB-INF/views/free/FreeWriteForm.jsp" />
+	</definition>
+	
+	<definition name="jobWriteForm" extends="Main">
+		<put-attribute name="body"
+			value="/WEB-INF/views/job/jobWriteForm.jsp" />
 	</definition>
 
 	<definition name="QnaList" extends="Main">
@@ -190,11 +199,20 @@
 	<definition name="FreeDetail" extends="Main">
 		<put-attribute name="body" value="/WEB-INF/views/free/FreeDetail.jsp" />
 	</definition>
+	
+	<definition name="jobDetail" extends="Main">
+		<put-attribute name="body" value="/WEB-INF/views/job/jobDetail.jsp" />
+	</definition>
 
 	<!-- 글수정폼 -->
 	<definition name="FreeModifyForm" extends="Main">
 		<put-attribute name="body"
 			value="/WEB-INF/views/free/FreeModifyForm.jsp" />
+	</definition>
+	
+	<definition name="jobModifyForm" extends="Main">
+		<put-attribute name="body"
+			value="/WEB-INF/views/job/jobModifyForm.jsp" />
 	</definition>
 
 	<!-- 태그리스트 -->

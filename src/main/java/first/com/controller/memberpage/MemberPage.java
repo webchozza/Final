@@ -90,11 +90,16 @@ public class MemberPage {
 		} else if(session_id != 0){ 
 			model.addAttribute("followCheck", followCheck);
 		}
-		
+
 		if(ap != null){
+		if(ap.equals("PushState")){
+			return "memberpage/MemberPage";
+		}else{
 			return "memberpage/MyBoard";//at Ajax request
+			}
 		}
-		
+
+		model.addAttribute("mpch", "on");
 		return "MemberPage";
 	}
 

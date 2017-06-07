@@ -7,12 +7,14 @@
 <title>DOKKY</title>
 <jsp:include page="/WEB-INF/views/main/Src.jsp" />
 </head>
-<body unload="a()">
+<body>
 	<div id="wrapper">
 		<div id="main">
 			<div class="inner">
 				<tiles:insertAttribute name="header" />
+				<div id="mainarea">
 				<tiles:insertAttribute name="body" />
+				</div>
 			</div>
 		</div>
 		<tiles:insertAttribute name="menu" />

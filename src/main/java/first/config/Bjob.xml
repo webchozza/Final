@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="bfree">
+<mapper namespace="bjob">
 
 	<!-- 비프리 글목록 -->
-	<select id="bfreeList" resultType="first.com.model.BoardDTO">
+	<select id="bjobList" resultType="first.com.model.BoardDTO">
 	SELECT * FROM (SELECT a.board_id, count(b.scrap_id) scrap_count 
-	FROM (select board_id from board WHERE bgroup_id = 2) a 
+	FROM (select board_id from board WHERE bgroup_id = 3) a 
 	LEFT OUTER JOIN SCRAP b ON a.board_id = b.board_id GROUP BY a.board_id) c 
 	LEFT OUTER JOIN BOARD d ON c.board_id = d.board_id 
 	<if test="n!=0">
@@ -31,18 +31,18 @@
 	</select>
 
 	<!-- 글쓰기 -->
-	<insert id="bfreeWrite" parameterType="Integer">
+	<insert id="bjobWrite" parameterType="Integer">
 		INSERT INTO board
 		(board_id, member_id, board_title, board_content, board_date,
 		board_nickname, board_hit, board_like, board_bad, board_comment_count,
 		bgroup_id, board_tag)
 		VALUES
 		(seq_board.NEXTVAL, #{member_id}, #{board_title},
-		#{board_content}, SYSDATE, #{board_nickname}, 0, 0, 0, 0, 2, #{board_tag})
+		#{board_content}, SYSDATE, #{board_nickname}, 0, 0, 0, 0, 3, #{board_tag})
 	</insert>
 
 	<!-- 조회수증가 -->
-	<update id="bfreeUpdateHit" parameterType="Integer">
+	<update id="bjobUpdateHit" parameterType="Integer">
 		UPDATE board
 		SET
 		board_hit= board_hit+1
@@ -50,7 +50,7 @@
 	</update>
 
 	<!-- 좋아요증가 -->
-	<update id="bfreeUpdateLike" parameterType="Integer">
+	<update id="bjobUpdateLike" parameterType="Integer">
 		UPDATE board
 		SET
 		board_like= board_like+1
@@ -59,7 +59,7 @@
 	</update>
 
 	<!-- 싫어요 증가 -->
-	<update id="bfreeUpdateBad" parameterType="Integer">
+	<update id="bjobUpdateBad" parameterType="Integer">
 		UPDATE board
 		SET
 		board_bad= board_bad+1
@@ -68,14 +68,14 @@
 	</update>
 
 	<!-- 글상세보기 -->
-	<select id="bfreeSelect" resultType="first.com.model.BoardDTO"
+	<select id="bjobSelect" resultType="first.com.model.BoardDTO"
 		parameterType="Integer">
 		SELECT * FROM BOARD
 		WHERE board_id=#{board_id}
 	</select>
 
 	<!-- 글수정 -->
-	<update id="bfreeModify" parameterType="first.com.model.BoardDTO">
+	<update id="bjobModify" parameterType="first.com.model.BoardDTO">
 		UPDATE board
 		SET
 		board_title=#{board_title},
@@ -86,41 +86,41 @@
 	</update>
 
 	<!-- 글삭제 -->
-	<delete id="bfreeDelete" parameterType="Integer">
+	<delete id="bjobDelete" parameterType="Integer">
 		DELETE FROM board WHERE
 		board_id=#{board_id}
 	</delete>
 
 	<!-- 제목검색 -->
-	<select id="bfreeSearchTitle" resultType="first.com.model.BoardDTO"
+	<select id="bjobSearchTitle" resultType="first.com.model.BoardDTO"
 		parameterType="String">
 		SELECT * FROM board
 		WHERE board_title like #{search} AND
-		bgroup_id=2
+		bgroup_id = 3
 		ORDER BY board_id DESC
 	</select>
 
 	<!-- 내용검색 -->
-	<select id="bfreeSearchContent" resultType="first.com.model.BoardDTO"
+	<select id="bjobSearchContent" resultType="first.com.model.BoardDTO"
 		parameterType="String">
 		SELECT * FROM board
 		WHERE board_content like #{search}
-		AND bgroup_id=2
+		AND bgroup_id = 3
 		ORDER BY board_id DESC
 	</select>
 
 	<!-- 작성자검색 -->
-	<select id="bfreeSearchMember" resultType="first.com.model.BoardDTO"
+	<select id="bjobSearchMember" resultType="first.com.model.BoardDTO"
 		parameterType="String">
 		SELECT * FROM board
 		WHERE board_nickname like #{search}
 		AND
-		bgroup_id=2
+		bgroup_id = 3
 		ORDER BY board_id DESC
 	</select>
 
 	<!-- 댓글수업데이트 -->
-	<update id="bfreeUpdateCountco" parameterType="Integer">
+	<update id="bjobUpdateCountco" parameterType="Integer">
 		UPDATE board
 		SET
 		board_comment_count = (SELECT count(*) FROM bcomment WHERE board_id =
@@ -129,7 +129,7 @@
 	</update>
 
 	<!-- 댓글수셀렉트 -->
-	<select id="bfreeSelectCountco" parameterType="Integer"
+	<select id="bjobSelectCountco" parameterType="Integer"
 		resultType="integer">
 		SELECT count(*) FROM bcomment
 		WHERE board_id=#{board_id}
@@ -139,7 +139,7 @@
 	<!-- 댓글 -->
 
 	<!-- 비씨프리목록 -->
-	<select id="bcfreeList" resultType="first.com.model.BcommentDTO">
+	<select id="bcjobList" resultType="first.com.model.BcommentDTO">
 		SELECT
 		bcomment_id,board_id,bgroup_id,bcomment_content,bcomment_date,bcomment_password,member_id,member_name
 		FROM (SELECT * FROM bcomment INNER JOIN member USING(member_id) WHERE
@@ -148,15 +148,15 @@
 	</select>
 
 	<!-- 댓글쓰기 -->
-	<insert id="bcfreeWrite" parameterType="first.com.model.BcommentDTO">
+	<insert id="bcjobWrite" parameterType="first.com.model.BcommentDTO">
 		INSERT INTO
 		bcomment(bcomment_id, board_id, bgroup_id, bcomment_content,
 		bcomment_date, member_id)
-		VALUES(seq_comment.NEXTVAL, #{board_id}, 2,
+		VALUES(seq_comment.NEXTVAL, #{board_id}, 3,
 		#{bcomment_content}, SYSDATE, #{member_id})
 	</insert>
 	<!-- 댓글삭제 -->
-	<delete id="bcfreeDelete" parameterType="first.com.model.BcommentDTO">
+	<delete id="bcjobDelete" parameterType="first.com.model.BcommentDTO">
 		DELETE bcomment
 		WHERE
 		bcomment_id=#{bcomment_id}

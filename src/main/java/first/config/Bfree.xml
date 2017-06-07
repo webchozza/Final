@@ -30,43 +30,6 @@
 		</if>
 	</select>
 
-<!-- 	<select id="bfreelist_like" resultType="first.com.model.BoardDTO">추천
-		SELECT * FROM board
-		WHERE
-		bgroup_id = 2
-		ORDER BY
-		board_like DESC,
-		board_id
-		DESC
-	</select>
-
-	<select id="bfreelist_comment" resultType="first.com.model.BoardDTO">댓글
-		SELECT * FROM board
-		WHERE
-		bgroup_id = 2
-		ORDER BY
-		board_comment_count DESC,
-		board_id DESC
-	</select>
-
-	<select id="bfreelist_scrap" resultType="first.com.model.BoardDTO">스크랩 ★미완성
-		SELECT * FROM board
-		WHERE
-		bgroup_id = 2
-		ORDER BY
-		board_id DESC
-	</select>
-
-	<select id="bfreelist_hit" resultType="first.com.model.BoardDTO">조회수
-		SELECT * FROM board
-		WHERE
-		bgroup_id = 2
-		ORDER BY
-		board_hit DESC,
-		board_id
-		DESC
-	</select> -->
-
 	<!-- 글쓰기 -->
 	<insert id="bfreeWrite" parameterType="Integer">
 		INSERT INTO board

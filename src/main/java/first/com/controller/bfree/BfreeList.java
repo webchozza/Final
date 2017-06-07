@@ -84,7 +84,12 @@ public class BfreeList {
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("sort", sort);
 		mav.addObject("bfreelist", boardDTO);
-		mav.setViewName("FreeList");
+
+		if(request.getParameter("ap") != null){
+			mav.setViewName("free/FreeList");
+		}else{
+			mav.setViewName("FreeList");
+		}
 		return mav;
 
 	}

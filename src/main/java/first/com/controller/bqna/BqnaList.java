@@ -86,7 +86,12 @@ public class BqnaList {
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("sort", sort);
 		mav.addObject("bqnalist", boardDTO);
-		mav.setViewName("QnaList");
+		
+		if(request.getParameter("ap") != null){
+			mav.setViewName("qna/QnaList");
+		}else{
+			mav.setViewName("QnaList");
+		}
 		return mav;
 
 	}

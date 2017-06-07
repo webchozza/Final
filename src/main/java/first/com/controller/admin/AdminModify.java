@@ -37,12 +37,12 @@ public class AdminModify {
 	
 	//(관리자) 회원 정보 수정 처리
 	@RequestMapping("/MemberModify.do")
-	public ModelAndView adminModify(MemberDTO member) {
+	public ModelAndView adminModify(@RequestParam(value="ap") String ap, MemberDTO member) {
 		ModelAndView mv = new ModelAndView();
 		
 		admin.memberModify(member);
 		
-		mv.setViewName("redirect:/dokky/MemberList.do");
+		mv.setViewName("redirect:/MemberList.do?ap="+ap);
 
 		return mv;
 	}

@@ -1,9 +1,11 @@
 function paging(path, i, search, n) {
-	$('#area').load(path, {
+	$('#pagearea').load(path, {
 		currentPage : i,
 		AllSearch : search,
 		n : n,
-		ap : 'AjaxPaging'
+		ap : 'AjaxPage'
+	},function(data){
+		history.pushState({data:data},'allsearch',"/dokky/AllSearchList.do");
 	});
 }
 
@@ -17,6 +19,8 @@ function sch() {
 		currentPage : i,
 		AllSearch : AllSearch,
 		ap : 'AjaxSearch'
+	},function(data){
+		history.pushState({data:data},'allsearch',"/dokky/AllSearchList.do");
 	});
 }
 
@@ -31,10 +35,12 @@ function category(n){
 		var AllSearch = form.AllSearch.value;
 	}
 	
-	$("#area").load(path, {
+	$("#pagearea").load(path, {
 		currentPage : i,
 		AllSearch : AllSearch,
 		n : n,
-		ap : "AjaxCategory"
+		ap : "AjaxPage"
+	},function(data){
+		history.pushState({data:data},'allsearch',"/dokky/AllSearchList.do");
 	});
 }

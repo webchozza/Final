@@ -27,10 +27,12 @@ public class MainService implements MainDAO{
 		List<Map<String, Object>> oslist = sqlSessionTemplate.selectList("main.oslist");
 		List<Map<String, Object>> colist = sqlSessionTemplate.selectList("main.colist");
 		List<Map<String, Object>> qnlist = sqlSessionTemplate.selectList("main.qnlist");
+		List<Map<String, Object>> jolist = sqlSessionTemplate.selectList("main.jolist");
 		
 		map.put("oslist", oslist);
 		map.put("colist", colist);
 		map.put("qnlist", qnlist);
+		map.put("jolist", jolist);
 		
 		return map;
 	}

@@ -24,68 +24,22 @@ border-bottom-color: #FFFFFF;
 }
 </style>
 <script>
-setInterval(function(){
-	var search = $("#AllSearch").val();
-	
-	$.ajax({
-		url: "/dokky/RecommendSearch.do",
-		type: "post",
-		dataType: "json",
-		data: {search : search},
-		success: function(data){
-			var str = '';
-			$.each(data,function(index, value){
-				str += '<a href="javascipt:;" style="color:#504747;">'+value.BOARD_TITLE+'</a>,&nbsp;&nbsp;&nbsp;';
-			});
-			$("#recospan").html('혹시 이 글을 찾으시나요?');
-			$("#recosearch").html(str);
-		}
-	});
-}, 600000);
-
-$(document).ready(function(){
-	var search = $("#AllSearch").val();
-	var session_id = $("#session_id").val();
-	
-	$.ajax({
-		url: "/dokky/RecommendSearch.do",
-		type: "post",
-		dataType: "json",
-		data: {search : search},
-		success: function(data){
-			var str = '';
-			if(data!=null){
-			$.each(data,function(index, value){
-				if(value.BGROUP_ID == "1"){
-					var path = '/dokky/bcodedetail.do?board_id='+value.BOARD_ID+'&currentPage=1&session_id='+session_id;
-				}else if(value.BGROUP_ID == "2"){
-					var path = '/dokky/bfreedetail.do?board_id='+value.BOARD_ID+'&currentPage=1&session_id='+session_id;
-				}else if(value.BGROUP_ID == "3"){
-					var path = '/dokky/bcodedetail.do?board_id='+value.BOARD_ID+'&currentPage=1&session_id='+session_id;
-				}else if(value.BGROUP_ID == "4"){
-					var path = '/dokky/bqnadetail.do?board_id='+value.BOARD_ID+'&currentPage=1&session_id='+session_id;
-				}
-				str += '<b><a href="'+path+'" style="color:#504747; padding-right:20px; color:#597D9C;">'+value.BOARD_TITLE+'</a></b>';
-			});
-			}
-		$("#recospan").html('<b style="font-size:15px; color:#398ECF;">혹시 이 글을 찾으시나요?</b>');
-		$("#recosearch").html(str);
-		}
-	});
+$(window).on('popstate', function(event) {
+	  var data = event.originalEvent.state;
+	  var mpch = $("#mpch").val();
+	  
+	  if(mpch == "on"){
+	    $('#pagearea').html(data.data);
+	  }else{
+	  	  $("#mainarea").html("");
+	      $("#mainarea").load("/dokky/AllSearchList.do", { ap : "AjaxSearch" });
+	  }
 });
-
 </script>
 </head>
 <body>
-<div id="area">
-	<h4>Search All</h4>
-	<span id="recospan" style="display:inline-block; position:relative; top:40px;">
-	<img src="resources/images/loading.gif" style="width:200px; height:100px; position:relative; bottom:15px;">
-	</span>&nbsp;&nbsp;
-	<div id="recosearch" style="display:inline-block; position:relative; top:40px;"></div>
-<div id="pagearea">
-<!-- 바디 -->
-<section id="banner">
+	<!-- 바디 -->
+	<section id="banner">
 		<div class="content">
 			<div class="table-wrapper">
 				<table>
@@ -157,14 +111,11 @@ $(document).ready(function(){
 			</div>
 		</div>
 	</section>
-</div>
-</div>
 <br/><br/><br/>
 <form name="valueform">
 <input type="hidden" id="member_id" value="${member_id}"/>
 <input type="hidden" id="path" value="${path}"/>
 <input type="hidden" id="session_id" value="${sessionScope.member_id}"/>
-<input type="hidden" id="mpch" value="${mpch}"/>
 </form>
 </body>
 </html>

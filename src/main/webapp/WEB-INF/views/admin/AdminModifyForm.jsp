@@ -64,6 +64,25 @@ function gosubmit2(){
 text-align:left;
 }
 </style>
+<script>
+$(document).ready(function(){
+	if(window.innerWidth > 500){
+		$("#mobilearea").html('');
+		$("#mobilearea").html('<input type="hidden" name="ap" value="web"/>');
+	}else if(window.innerWidth <= 500){
+		$("#mobilearea").html('');
+	}
+});
+
+$(window).resize(function(){
+	if(window.innerWidth > 500){
+		$("#mobilearea").html('');
+		$("#mobilearea").html('<input type="hidden" name="ap" value="mobile"/>');
+	}else if(window.innerWidth <= 500){
+		$("#mobilearea").html('');
+	}
+});
+</script>
 </head>
 
 <body>
@@ -77,7 +96,8 @@ text-align:left;
 		<form name="frm" action="/dokky/MemberModify.do" method="post" onsubmit="">
 				<div class="6u 12u$(xsmall)" style="text-align:left;">			
 				<input type="hidden" name="member_id" id="member_id" value="${member.member_id}"/>
-			
+				<span id="mobilearea">
+				</span>
 					<input type="text"  name="member_name" id="member_name" value="${member.member_name }" placeholder="닉네임"/>
 					<br>
 					<br>

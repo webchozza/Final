@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script src="${pageContext.request.contextPath}/resources/assets/js/memberpage/follow.js?v=1"></script>
+<script src="resources/assets/js/memberpage/follow.js?v=3"></script>
 <title>DOKKY</title>
 <style>
 input[name=ss] {
@@ -27,9 +27,28 @@ table {
 	width: 60%;
 }
 </style>
+<script>
+$(window).on('popstate', function(event) {
+	  var data = event.originalEvent.state;
+	  var member_id = ${sessionScope.member_id};
+	  var mpch = $("#mpch").val();
+	  
+	  if(mpch == "on"){
+		  $("#movearea").html(data.data);
+	  }else{
+		  $("#movearea").html("");
+	  	  $("#mainarea").html("");
+	      $("#mainarea").load("/dokky/MemberPage.do", {
+			member_id : member_id,
+			ap : "PushState",
+		},function(){
+			$("#mpch").val("on");
+		});
+	  }
+	});
+</script>
 </head>
 <body>
-<div id="area">
 			<!-- 바디 -->
 	<div class="table-wrapper">
 	<c:if test="${myCount eq null}">
@@ -52,7 +71,7 @@ table {
 					<tbody>
 					<c:forEach var="follow" items="${list}">
 					<tr>
-							<td width="30%" align="center"><a href="/dokky/MemberPage.do?member_id=${follow.member_id}&session_id=${sessionScope.member_id}" id="b">${follow.member_name}</a></td>
+							<td width="30%" align="center" style="min-width:200px;"><a href="/dokky/MemberPage.do?member_id=${follow.member_id}&session_id=${sessionScope.member_id}" id="b">${follow.member_name}</a></td>
 							<td width="10%" style="padding-right: 30px;"><a class="icon fa-hand-paper-o">${follow.following_count}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 							<a class="icon fa-hand-o-up">${follow.follower_count}</a>
 						</tr>
@@ -69,7 +88,6 @@ table {
 			.vc { height:3%; top: 0; bottom:0; margin-top:auto; margin-bottom:auto; }
 			</style>
 			<!--ㅡㅡㅡㅡㅡ paging ㅡㅡㅡㅡㅡ-->
-			</div>
 			<br/><br/><br/>
 			<form name="valueform">
 <input type="hidden" id="member_id" value="${member_id}"/>

@@ -34,11 +34,21 @@ function urlencode(str) {
 }
 
 function codelist(line1){
-	console.log("통신시작");
-	$("#codearea").load("/dokky/bcodelist.do",{line: line1, ap: "AjaxCode"},function(){
-		console.log("통신 성공"); });
-	}
+	$("#codearea").load("/dokky/bcodelist.do",{line: line1, ap: "AjaxCode"},function(data){
+		history.pushState({data:data},'Code',"/dokky/bfreelist.do");
+	});
+}
 	
+	
+
+	$(window).on('popstate', function(event) {
+	  var data = event.originalEvent.state;
+	  if(data == null){
+		  location.href="/dokky/main.do";
+	  }else{
+	    $('#mainarea').html(data.data);
+	  }
+	});
 </script>
 <title>DOKKY</title>
 <style>

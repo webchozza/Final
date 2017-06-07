@@ -19,7 +19,7 @@ function followclick(addordelete){
 	if(addordelete == "add"){
 	$.ajax({
 		url:"/dokky/AddFollow.do",
-		type:"get",
+		type:"post",
 		dataType:"json",
 		data: {follow_member_id : member_id, member_id : session_id},
 		success: function(data){
@@ -29,7 +29,7 @@ function followclick(addordelete){
 	else if (addordelete == "delete"){
 	$.ajax({
 		url:"/dokky/DeleteFollow.do",
-		type:"get",
+		type:"post",
 		dataType:"json",
 		data: {follow_member_id : member_id, member_id : session_id},
 		success: function(data){

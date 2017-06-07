@@ -8,6 +8,8 @@ function paging(path, i, search, n) {
 		n : n,
 		search : search,
 		ap : 'AjaxPaging'
+	},function(data){
+				history.pushState({data:data},'myboard',"/dokky/MemberPage.do?member_id="+member_id);
 	});
 }
 
@@ -23,6 +25,8 @@ function sch() {
 		currentPage : i,
 		search : search,
 		ap : 'AjaxSearch'
+	},function(data){
+				history.pushState({data:data},'myboard',"/dokky/MemberPage.do?member_id="+member_id);
 	});
 }
 
@@ -38,6 +42,8 @@ function follow(){
 		currentPage : i,
 		search : search,
 		ap : 'AjaxFollow'
+	},function(data){
+				history.pushState({data:data},'follow',"/dokky/MemberPage.do?member_id="+member_id);
 	});
 }
 
@@ -52,22 +58,9 @@ function scrap(){
 		member_id : member_id,
 		currentPage : i,
 		search : search,
-		ap : 'AjaxScrap'
-	});
-}
-
-function memberpage(){
-	
-	var form = document.getElementById('searchform');
-	var i = form.i.value;
-	var search = form.search.value;
-	var member_id = $("#member_id").val();
-	
-	$('#movearea').load("/dokky/MemberPage.do", {
-		member_id : member_id,
-		currentPage : i,
-		search : search,
-		ap : 'AjaxMemberPage'
+		ap : 'AjaxScrap'},
+		function(data){
+				history.pushState({data:data},'scrap',"/dokky/MemberPage.do?member_id="+member_id);
 	});
 }
 
@@ -88,3 +81,4 @@ function deleteMyBoard(board_id){
 		}
 	});
 }
+

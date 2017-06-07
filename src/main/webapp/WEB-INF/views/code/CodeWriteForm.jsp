@@ -66,13 +66,13 @@
 					<input type="hidden" name="bgroup_id" id="bgroup_id" value="1" />
 
 					<!-- BOARD_TITLE -->
-					<div class="6u 12u$(xsmall)" style="width: 400pt;">
-						<input type="text" name="board_title" id="board_title" value="${updateform.board_title}" style="width: 400pt;" placeholder="[글제목] <c:out value="${updateform.board_title}"/>" />
+					<div class="6u 12u$(xsmall)" style="width: 90%;">
+						<input type="text" name="board_title" id="board_title" value="${updateform.board_title}" style="width: 90%;" placeholder="[글제목] <c:out value="${updateform.board_title}"/>" />
 					</div>
 					<br />
 					
 					<c:if test="${updateform.board_id ne null}">
-					 <div class="6u 12u$(xsmall)" style="width: 400pt;">
+					 <div class="6u 12u$(xsmall)" style="width: 90%;">
 					 <strong><font style="color:#f56a6a">업로드 파일 : ${file.bfile_src}<a href="/dokky/bcodeuploaddelete.do?uploaddelete_id=<c:out value="${updateform.board_id}"/>" class="button special small">삭제</a></font> <!-- 여기에 업로드파일 --></strong>
 					</div>
 					</c:if>
@@ -80,19 +80,19 @@
 					
 					<!-- BOARD_CONTENT -->
 					<div class="12u$">
-						<textarea name="board_content" id="smarteditor" value="${updateform.board_content}" style="width:50%; height: 400px;" placeholder="[메시지] <c:out value="${updateform.board_content}"/> " rows="6">${updateform.board_content}</textarea>
-					</div>
+      					<textarea name="board_content" id="smarteditor"  rows="10" cols="100" style="width:100%; min-width:200px; height:400px;">${updateform.board_content}</textarea>
+     				</div>
 					
 					<!-- TAG -->
-					 <div class="6u 12u$(xsmall)" style="width: 400pt;">
+					 <div class="6u 12u$(xsmall)" style="width: 90%;">
 					 	<input type="text" name="board_tag" id="message" style="width: 90%" placeholder="[태그]" value="${updateform.board_tag}">
 					 </div>
 					
 					<!-- FILE -->
 					<div class="12u$">
-					  <input type="file" name="file" id="file" style="width:300pt;">
+					  <input type="file" name="file" id="file" style="width:60%;">
 					  <br/>
-					  <input type="submit" id="bcodeinsert" style="width: 300pt;" value="글쓰기" class="button special">
+					  <input type="submit" id="bcodeinsert" style="width: 60%;" value="글쓰기" class="button special">
 					</div>
 				</form>
 

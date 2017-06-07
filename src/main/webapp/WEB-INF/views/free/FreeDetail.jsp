@@ -24,6 +24,17 @@ function insertScrap(){
 	});
 }
 
+//비로그인시 유효성 검사
+function vali(){
+	alert("로그인 후에 이용가능한 서비스입니다.");
+	
+	if(!confirm("로그인 화면으로 이동하시겠습니까?")){
+		return false;
+	}
+	
+	location.href="/dokky/loginform.do";
+}
+
 function scrapcheck(checkValue){
 //스크랩하지 않은 글이면 클릭 가능
 var strA = '<a href="javascript:;" style="font-size: 30px" class="icon fa-bookmark" onclick="insertScrap()"></a>';
@@ -32,7 +43,7 @@ var strA = '<a href="javascript:;" style="font-size: 30px" class="icon fa-bookma
 var strDiv = '<div style="font-size: 30px; color: #f56a6a;" class="icon fa-bookmark"></div>';
 	strDiv += '<h2 style="color: #f56a6a;">스크랩</h2>';
 	
-var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-bookmark"></div>';
+var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-bookmark" onclick="return vali()"></div>';
 	strDivNo += '<h2 style="color: #7f888f;">스크랩</h2>';
 	
 if(checkValue == -1){
@@ -52,7 +63,7 @@ function recommendcheck(checkValue){
 	var strDiv = '<div style="font-size: 30px; color: #f56a6a;" class="icon fa-thumbs-up"></div>';
 		strDiv += '<h2 style="color: #f56a6a;">${bfreeDetail.board_like }</h2>';
 		
-	var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-thumbs-up"></div>';
+	var strDivNo = '<div style="font-size: 30px; color: #7f888f;" class="icon fa-thumbs-up" onclick="return vali()"></div>';
 		strDivNo += '<h2 style="color: #7f888f;">${bfreeDetail.board_like }</h2>';
 		
 	if(checkValue == -1){

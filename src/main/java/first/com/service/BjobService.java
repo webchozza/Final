@@ -1,67 +1,91 @@
 package first.com.service;
 
-import first.com.dao.BjobDAO;
+import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Service;
+
+import first.com.controller.bjob.BjobListDTO;
+import first.com.dao.BjobDAO;
+import first.com.model.BcommentDTO;
+import first.com.model.BoardDTO;
+
+@Service
 public class BjobService implements BjobDAO {
 
+	@Resource
+	private SqlSessionTemplate SqlSessionTemplate;
+
 	@Override
-	public String bjobList() {
-		// TODO Auto-generated method stub
+	public List<BoardDTO> bjobList(BjobListDTO bjobListDTO) {// 由ъ뒪�듃
+		return SqlSessionTemplate.selectList("bjob.bjobList", bjobListDTO);
+	}
+
+	@Override
+	public BoardDTO bjobDetail(int board_id) {// �긽�꽭
+		return SqlSessionTemplate.selectOne("bjob.bjobSelect", board_id);
+	}
+
+	@Override
+	public List<BcommentDTO> bcjobList(int board_id) {// 肄붾찘�듃由ъ뒪�듃
+		return SqlSessionTemplate.selectList("bjob.bcjobList", board_id);
+	}
+
+	@Override
+	public String bjobWriteForm() {// �벐湲고뤌
 		return null;
 	}
 
 	@Override
-	public String bjobDetail() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bjobWrite(BoardDTO boardDTO) {// �벐湲�
+		return SqlSessionTemplate.insert("bjob.bjobWrite", boardDTO);
 	}
 
 	@Override
-	public String bjobWriteForm() {
-		// TODO Auto-generated method stub
-		return null;
+	public BoardDTO bjobModifyForm(BoardDTO boardDTO) {// �닔�젙�뤌
+		return boardDTO;
 	}
 
 	@Override
-	public String bjobWrite() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bjobModify(BoardDTO boardDTO) {// �닔�젙
+		return SqlSessionTemplate.update("bjob.bjobModify", boardDTO);
 	}
 
 	@Override
-	public String bjobModifyForm() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bjobDelete(int board_id) {// �궘�젣
+		return SqlSessionTemplate.delete("bjob.bjobDelete", board_id);
 	}
 
 	@Override
-	public String bjobModify() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bjobHit(int board_id) {// 議고쉶�닔�뾽�럠
+		return SqlSessionTemplate.update("bjob.bjobUpdateHit", board_id);
 	}
 
 	@Override
-	public String bjobDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bjobLike(int board_id) {// 異붿쿇
+		return SqlSessionTemplate.update("bjob.bjobUpdateLike", board_id);
 	}
 
 	@Override
-	public String bjobRecommand() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bjobBad(int board_id) {// �떆�윭�슂
+		return SqlSessionTemplate.update("bjob.bjobUpdateBad", board_id);
 	}
 
 	@Override
-	public String bCjobWrite() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bCjobWrite(BcommentDTO bcommentDTO) {// 肄붾찘�듃�벐湲�
+		return SqlSessionTemplate.insert("bjob.bcjobWrite", bcommentDTO);
 	}
 
 	@Override
-	public String bCjobDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	public int bCjobDelete(int bcomment_id) {// 肄붾찘�궘�젣
+		return SqlSessionTemplate.delete("bjob.bcjobDelete", bcomment_id);
+	}
+
+	@Override
+	public int bjobUpdateCountco(int board_id) {// 肄붾찘�닔�뾽�럠
+		return SqlSessionTemplate.update("bjob.bjobUpdateCountco", board_id);
 	}
 
 }

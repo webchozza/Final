@@ -1,27 +1,42 @@
 package first.com.dao;
 
+import java.util.List;
+
+import first.com.controller.bjob.BjobListDTO;
+import first.com.model.BcommentDTO;
+import first.com.model.BoardDTO;
+
 public interface BjobDAO {
 	
-	public String bjobList();
+	public List<BoardDTO> bjobList(BjobListDTO bjobListVO);
 	
-	public String bjobDetail();
+	public BoardDTO bjobDetail(int board_id);
 	
 	public String bjobWriteForm();
 	
-	public String bjobWrite();
+	public int bjobWrite(BoardDTO boardDTO);
 	
-	public String bjobModifyForm();
+	public BoardDTO bjobModifyForm(BoardDTO boardDTO);
 	
-	public String bjobModify();
+	public int bjobModify(BoardDTO boardDTO);
 	
-	public String bjobDelete();
+	public int bjobDelete(int board_id);
 	
-	public String bjobRecommand();
+	public int bjobHit(int board_id);
 	
+	public int bjobLike(int board_id);
 	
+	public int bjobBad(int board_id);
 	
-	public String bCjobWrite();
+
+	public List<BcommentDTO> bcjobList(int board_id);
 	
-	public String bCjobDelete();
+	public int bCjobWrite(BcommentDTO bcommentDTO);
+	
+	public int bCjobDelete(int bcomment_id);
+	
+	public int bjobUpdateCountco(int board_id);
+
+	
 
 }

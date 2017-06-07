@@ -22,6 +22,12 @@
 			(SELECT board_title,board_nickname,board_id,bgroup_id,board_date, member_id FROM board WHERE bgroup_id = 4 ORDER BY board_date DESC) 
 			 WHERE rownum <= 5]]>
 	</select>
+	
+	<select id="jolist" resultType="java.util.Map">
+	<![CDATA[SELECT board_title, board_nickname, board_id, bgroup_id os_bid , board_date, member_id FROM 
+			(SELECT board_title,board_nickname,board_id,bgroup_id,board_date, member_id FROM board WHERE bgroup_id = 3 ORDER BY board_date DESC) 
+			 WHERE rownum <= 5]]>
+	</select>
 
 	<select id="allSearchList" resultType="first.com.model.BoardDTO" parameterType="java.util.Map">
 	SELECT * FROM (SELECT board_id, member_id, board_title, board_content, board_date, board_nickname, board_hit, board_like, 

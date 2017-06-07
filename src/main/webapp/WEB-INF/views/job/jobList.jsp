@@ -1,5 +1,3 @@
-<%@page import="first.com.controller.bfree.BfreeList"%>
-<%@page import="first.com.model.BoardDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/main/Taglib.jsp"%>
@@ -8,7 +6,7 @@
 <head>
 <title>DOKKY</title>
 <script
-	src="${pageContext.request.contextPath}/resources/assets/js/free/freelist.js"></script>
+	src="${pageContext.request.contextPath}/resources/assets/js/job/joblist.js?v=2"></script>
 <style>
 input[name=ss] {
 	display: none;
@@ -38,7 +36,7 @@ $(window).on('popstate', function(event) {
 </head>
 <body>
 <div id="movearea">
-	<h4>Community</h4>
+	<h4>Job</h4>
 
 	<!-- 바디 -->
 	<section id="banner">
@@ -53,21 +51,21 @@ $(window).on('popstate', function(event) {
 					</colgroup>
 					<thead>
 					<c:if test="${sessionScope.member_email ne null}">
-								<a href="bfreewriteform.do" class="button special"><i class="icon fa-pencil"> 새 글 쓰기</i></a>
+								<a href="bjobwriteform.do" class="button special"><i class="icon fa-pencil"> 새 글 쓰기</i></a>
 								</c:if>
 						<tr>
 							<td colspan="6">
-							<a href="bfreelist.do?sort=&search=${search }&n=${n}">최신순</a> <a
-								href="bfreelist.do?sort=like&search=${search }&n=${n}">추천순</a> <a
-								href="bfreelist.do?sort=comment&search=${search }&n=${n}">댓글순</a> <a
-								href="bfreelist.do?sort=scrap&search=${search }&n=${n}">스크랩순</a> <a
-								href="bfreelist.do?sort=hit&search=${search }&n=${n}">조회순</a></td>
+							<a href="bjoblist.do?sort=&search=${search }&n=${n}">최신순</a> <a
+								href="bjoblist.do?sort=like&search=${search }&n=${n}">추천순</a> <a
+								href="bjoblist.do?sort=comment&search=${search }&n=${n}">댓글순</a> <a
+								href="bjoblist.do?sort=scrap&search=${search }&n=${n}">스크랩순</a> <a
+								href="bjoblist.do?sort=hit&search=${search }&n=${n}">조회순</a></td>
 								</td>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach var="list" items="${bfreelist }">
-							<c:url var="detailURL" value="bfreedetail.do">
+						<c:forEach var="list" items="${bjoblist }">
+							<c:url var="detailURL" value="bjobdetail.do">
 								<c:param name="board_id" value="${list.board_id }" />
 								<c:param name="currentPage" value="${currentPage }" />
 								<c:param name="session_id" value="${sessionScope.member_id}" />
@@ -94,7 +92,7 @@ $(window).on('popstate', function(event) {
 			<br>
 
 			<div class="row uniform" align="center">
-				<form method="post" action="bfreelist.do">
+				<form method="post" action="bjoblist.do">
 					<input type="hidden" name="sort" value="${sort}">
 
 					<div class="select-wrapper" style="float: left; max-width: 140px; min-width:80px;">

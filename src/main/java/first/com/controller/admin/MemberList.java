@@ -41,6 +41,7 @@ public class MemberList {
 							 @RequestParam(value="ap", required=false) String ap,
 							 Model model){
 		
+		System.out.println("1");
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		startrow = ((currentPage-1) * blockCount) + 1;
@@ -54,7 +55,8 @@ public class MemberList {
 		if(ch != null && !ch.equals("")){ map.put("ch", ch);
 		model.addAttribute("ch", ch);
 		}
-
+		
+		System.out.println("2");
 		List<MemberDTO> list = admin.memberList(map);
 		
 		totalCount = admin.memberCount(map);
@@ -67,6 +69,7 @@ public class MemberList {
 		
 		model.addAttribute("n", n);
 		
+		System.out.println("3");
 		model.addAttribute("i", currentPage);
 		model.addAttribute("path", page.getFullPath());
 		model.addAttribute("search", search);

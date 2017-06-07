@@ -10,8 +10,20 @@ input[name=ss] {
 display:none;
 }
 </style>
+<script>
+$(window).on('popstate', function(event) {
+	  var data = event.originalEvent.state;
+	  if(data == null){
+		  location.href="/dokky/main.do";
+	  }else{
+		$('#movearea').before(data.header);
+	    $('#mainarea').html(data.data);
+	  }
+	});
+</script>
 </head>
 <body>
+<div id="movearea">
 	<h4>Q&A</h4>
 
 	<!-- 바디 -->
@@ -91,6 +103,6 @@ display:none;
 			</div>
 		</div>
 	</section>
-
+</div>
 </body>
 </html>

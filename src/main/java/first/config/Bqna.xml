@@ -106,8 +106,8 @@
 	</update>
 
 	<!-- 댓글목록 -->
-	<select id="bcqnaList" resultType="first.com.model.BcommentDTO">
-		SELECT a.*,b.bcomment_id as answer FROM(SELECT
+	<select id="bcqnaList" resultType="first.com.model.BcommentDTO" parameterType="int">
+		SELECT a.*,b.bcomment_id as answer, b.member_id as answer_id FROM(SELECT
 		bcomment_id,board_id,bgroup_id,bcomment_content,bcomment_date,bcomment_password,member_id,member_name
 		FROM (SELECT * FROM bcomment INNER JOIN member USING(member_id) WHERE
 		board_id=#{board_id}) ORDER BY bcomment_id) a left outer join ANSWER b on a.board_id=b.board_id

@@ -39,7 +39,7 @@ public class BqnaDetail {
 		BoardDTO bqnaDetail = bqnaService.bqnaDetail(board_id);
 		List<BcommentDTO> bcqnaList = bqnaService.bcqnaList(board_id);
 		bqnaService.bqnaUpdateHit(board_id);
-		
+
 		int answerCheck = bqnaService.bqnaAnswerCheck(board_id);
 		if(answerCheck > 0){
 			mav.addObject("answerCheck", 1);
@@ -49,6 +49,7 @@ public class BqnaDetail {
 		
 		for(int i=0;i<bcqnaList.size(); i++){
 			if(bcqnaList.get(i).getBcomment_id() == bcqnaList.get(i).getAnswer()){
+				System.out.println(bcqnaList.get(i).getAnswer_id());
 				mav.addObject("answercomment", bcqnaList.get(i));
 				break;
 			}
